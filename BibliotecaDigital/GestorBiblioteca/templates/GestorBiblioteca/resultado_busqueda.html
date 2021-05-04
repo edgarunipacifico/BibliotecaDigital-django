@@ -1,0 +1,75 @@
+{% load static %}
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   
+    <title>Document</title>
+
+</head>
+<body>
+        
+
+
+    <p><strong> Consulta:{{query}}</strong></p><!--muestra el producto que sedecea buscar--->
+    {% if books %}<!--si incuentra la busqueda procede a mostrar-->
+
+        <p>Libros que contengan la Consulta: <strong> {{query}}</strong> encontrados: {{books|length}} libros
+
+        <ul>
+       
+            {% for book in books  %}
+                <li>
+                        <a href="{% url 'book-detail' book.pk %}"><p>Titulo{{book.title}}</a><br>
+                        <a href="#">Author:{{book.author}}</a></p>
+                        <br><p>Resumen:{{book.Summary}}
+                        &nbsp<br><br>Genero:{{book.area.subgenero.genero}} <br>
+                        Area del conocimiento:{{book.area.subgenero}}<br>
+                        Tema:{{ book.area }}</p>
+                        <br>&nbsp: {{book.bookfile.portada}}&nbsp:<br> {{book.bookfile.myfile}}
+                        <p>ID:{{book.author_id}}</P>
+                       
+                </li>
+            {%  endfor %}
+
+        </ul> 
+    
+    {% elif generos%}
+   
+            <ul>
+            {% for genero in generos %}
+
+            <li>
+                    <p>Genero:{{genero.nombre}}</p>
+                    
+            <li>
+
+            {% endfor %}
+            </ul>
+    
+   
+    {% elif authors %}
+
+        <ul>
+            {%for author in authors%}
+            <img src="{{ author.bookfile.portada }}" style='width:200px;height:200px'alt="portada">
+            <li>{{author.search_name}}</li>
+            <li><a href="#"> {{author.title}}</a></li><br>
+           
+
+            {% endfor %}
+        </ul>
+    
+    {% else %}
+        
+        <p>Busqueda no encontrado</p>
+
+    {% endif %}
+
+
+
+</body>
+</html>

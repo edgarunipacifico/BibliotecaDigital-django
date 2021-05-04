@@ -1,0 +1,76 @@
+{% extends 'GestorBiblioteca/base.html' %}
+
+
+{% block content %}
+
+ 
+<h1>Local Library Home</h1>
+
+<p>Welcome to <em>LocalLibrary</em>, a very basic Django website developed as a tutorial example on the Mozilla
+  Developer Network.</p>
+
+<h2>Dynamic content</h2>
+
+<p>The library has the following record counts:</p>
+
+<ul>
+  <li>
+    <a href="{% url 'Lista_Book' %} "><strong>Books: {{books|length}}</strong></a>
+  </li>
+
+  <li>
+    <a href="{% url 'author_list' %}"> <strong>Authors: {{author|length}}</strong></a>
+  </li>
+</ul>
+<p>contamos con {{generos|length }} generos, organizados en {{ subgeneros|length }} area del conocimiento y
+  {{ temas|length }} temas</p>
+
+<h3>Temas</h3>
+
+<p>Puedes encontrar los siguentes Contenido</p>
+
+{% if temas %}
+<ul>
+  {% for tema in temas %}
+
+  <li> <a href=" {% url 'listbook_x_tema' tema.id %}">{{tema}}</a> </li>
+
+  {% endfor %}
+</ul>
+
+{% else %}
+<p>No hay temas registrado</p>
+{% endif %}
+
+<h4>Area del conocimiento</h4>
+
+{% if subgeneros%}
+<ul>
+  {% for subgenero in subgeneros %}
+
+  <li> <a href="{% url 'lisbook_x_subgenero' subgenero.id %}  "> {{subgenero}} </a></li>
+
+  {% endfor %}
+</ul>
+
+{% else %}
+<p>No hay subgenero registrado</p>
+{% endif %}
+
+<h4>Genero</h4>
+
+{% if generos%}
+<ul>
+  {% for genero in generos %}
+
+  <li> <a href="{% url 'list_book_x_genero' genero.id %}"> {{genero}} </a> </li>
+
+  {% endfor %}
+</ul>
+
+{% else %}
+<p>No hay genero registrado</p>
+{% endif %}
+</section>
+
+{% endblock  %}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
++
+    {% if list_book_x_subgenero %}
+        <p>{{list_book_x_subgenero|length}}&nbsp Registros</p>
+        <ul>
+            {% for book_x_subgenero in  list_book_x_subgenero%}
+        
+                <li> 
+                
+                    <a href=" {% url 'book-detail' book_x_subgenero.id %} ">{{book_x_subgenero}} </a>
+                   
+                </li>
+
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</body>
+</html>

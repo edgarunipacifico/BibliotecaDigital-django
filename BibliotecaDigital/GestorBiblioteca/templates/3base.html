@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+     <ul class="sidebar-nav">
+
+    
+     <!-------------
+     
+     
+     Creamos las URL de enlace de inicio y cierre de sesión utilizando la urletiqueta de plantilla 
+     y los nombres de las configuraciones de URL respectivas. Tenga en cuenta también cómo hemos 
+     añadido ?next={{request.path}}al final de las URL. Lo que esto hace es agregar un parámetro 
+     de URL que luego  contenga la dirección (URL) de la página actual , al final de la URL vinculada.
+      Después de que el usuario haya ingresado / salido exitosamente, las vistas usarán este " next" 
+      valor para redirigir al usuario de regreso a la página donde primero hicieron 
+      clic en el enlace de inicio / cierre de sesión
+     
+     ----------->
+       {% if user.is_authenticated %}
+         <li>User: {{ user.get_username }}</li>
+         <li><a href="{% url 'account_logout' %}?next={{request.path}}">Logout</a></li>   
+       {% else %}
+         <li><a href="{% url 'account_login' %}?next={{request.path}}">Login</a></li>   
+       {% endif %} 
+      </ul>
+
+      <a href="{% url 'book_create'  %}">nuevo libro </a>
+   
+   
+  {% block content %}
+ 
+
+ 
+ {% endblock  %} 
+
+
+
+</body>
+</html>

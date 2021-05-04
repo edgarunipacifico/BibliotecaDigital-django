@@ -1,0 +1,27 @@
+
+{% if  author_list %}
+
+    <p>{{author_list|length}} &nbsp Registros</p>
+
+    <ul>
+        {% for author in author_list %}
+            <li>  
+                {% if author.last_name %}
+
+                    <a href="{% url 'author_detail' author.pk %}">Nombre: {{author.first_name}} {{author.last_name}}</a> 
+
+                {% else %}
+                
+                     <a href="{% url 'author_detail' author.pk %}">Nombre: {{author.first_name}} </a>   
+
+                {% endif %} 
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    
+    No existen egistro de author
+
+{% endif %}
+
+

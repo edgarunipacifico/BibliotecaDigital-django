@@ -1,0 +1,38 @@
+{% extends 'GestorBiblioteca/base.html' %}
+
+
+{% block title %}
+Lista de libros
+{% endblock title %}
+
+{% block content %}
+
+
+<p> {{book_list |length }} &nbsp Registros </p>
+<article>
+    <table>
+        <tr>
+            <th>Tìtulo</th>
+            <th>author</th>
+            <th>fecha de publicacion</th>
+        </tr>
+        <tr>
+            {% for book in book_list %}
+            {% if book.author.last_name %}
+
+            <th><a href="{% url 'book-detail' book.pk %}"><span translate="no">{{book.title}}</span></a></th>
+            <th><a href="#" >{{book.author.first_name }}&nbsp{{book.author.last_name}}</a></th>
+            <th>{{ book.create }}</th>
+        </tr>
+        <tr>
+            {% else %}
+            <th><a href="{% url 'book-detail' book.pk %}">{{book.title}}</a></th>
+            <th><a href="">{{ book.author.first_name }}</a></th>
+            <th>{{ book.create }}</th>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+</article>
+
+{% endblock content %}

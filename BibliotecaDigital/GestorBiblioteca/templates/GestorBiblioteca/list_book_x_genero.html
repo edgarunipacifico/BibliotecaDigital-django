@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+   
+    {% if list_book %}
+        <p>{{ list_book |length}}&nbspRegistro</p>
+        <ul>
+            {% for book_x_genero in  list_book %}
+        
+                <li> 
+                
+                    <a href=" {% url 'book-detail' book_x_genero.id %} ">{{book_x_genero}} </a>
+                   
+                </li>
+
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</body>
+</html>

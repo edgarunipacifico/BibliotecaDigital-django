@@ -1,0 +1,36 @@
+
+/*section{
+
+    font-size: 24px;
+}
+
+p{
+    color: darkgreen;
+    font-size: 20px;
+
+}
+h1{
+    color: rgb(22, 190, 22);
+    font-size: 35;
+}
+.titulo{
+    color: darkgreen;
+    font-size: 30px;
+}
+
+table:nth-child(odd){/* seudo clase (odd)  afecta elementos que son
+    hijos de otro elemento y tienen un indixe in par*/
+  /*  font-size: 20px;
+    color: red;
+    background-color: black;
+/*}
+
+:not(p){/* seudo clase para selecionar elemento que no coincide */
+/*    margin: 0px;
+}
+*/
+section img{
+    float: left;
+    margin: 0px 10px;
+
+}

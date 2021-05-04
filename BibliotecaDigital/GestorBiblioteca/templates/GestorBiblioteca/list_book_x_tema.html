@@ -1,0 +1,26 @@
+
+
+{% if list_book %}
+    <p>
+        {{list_book|length}} &nbsp Registros 
+    </p>
+    
+    <h1>
+        Lista de libros sobre: 
+    </h1>
+    
+    <ul>
+        {% for book in list_book %}
+        
+            <li>
+                <a href="{% url 'book-detail' book.pk %}"> {{ book }} </a>
+            
+            </li>
+              
+        {% endfor %}
+    </ul>
+{% else %}
+
+    <p>no hay libros registrados</h1>
+
+{% endif %}

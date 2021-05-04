@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <div id="ventana_modal" class="modal fade" role="dialog"></div>
+
+
+        <div class="modal-dialog modal-lg">
+
+
+
+            <div class="modal-content">
+                <a class="btn btn-warning" onclick="return abrir_modal('{% url 'genero_create' %}')"
+                    href="{%url 'genero_create'%}"><span class="fa fa-plus-circle"></span> + Genero</a>
+
+                <form role="form" action="{% url 'subgenero_create' %}" method="post" class="form-inline">
+
+
+                    <div class="panel panel-default">
+
+
+                        <div class="panel-heading">
+
+
+                            Editar/Crear Categoría
+
+
+                        </div>
+
+                        <!-- /.panel-heading -->
+
+
+                        <div class="panel-body">
+                            {% csrf_token %}
+                            {{ form.as_table }}
+
+                            <button type="submit" class="btn btn-danger"><span class="fa fa-save"></span>
+                                Guardar</button>
+
+
+                            <a onclick="return abrir_modal('{% url 'tema_create' %}')" href="{% url 'tema_create' %}"
+                                class="btn btn-success"><span class="fa fa-undo"></span> Cancelar</a>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                </form>
+    </body>
+
+</html>

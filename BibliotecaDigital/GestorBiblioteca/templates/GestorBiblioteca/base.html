@@ -1,0 +1,225 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="book,libros,Biblioteca,html,css,c+,python django">
+    <title>{% block title %} {% endblock  %}</title>
+     <!-- Bootstrap 4 -->
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    -->
+     <!-- Font Awesome -->
+    <!---<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+     Moment.js 
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+ 
+      Tempus Dominus Bootstrap 4 
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
+    favicon
+    <link rel="shortcut icon" href="{% static 'GestorBiblioteca/css/icon.png' %}" type="image/x-icon">
+--->
+    <!-------stilo.css--->
+    <link rel="stylesheet" href="{% static 'GestorBiblioteca/css/estilo.css' %}">
+    <!-------seleccionar2--------->
+    <!--<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <-- Bootstrap -->
+    <!--<link href="{% static 'GestorBiblioteca/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">--->
+    <!--djangon-select2----->
+    {{ form.media.css }}
+
+    <style>
+      input,
+      select {
+        width: 50%
+      }
+    </style>
+<script src="{% static 'GestorBiblioteca/js/tree.min.js' %}"></script>
+<script>
+  var renderer,canvas,imagen,escena,camara,malla;
+  
+  function iniciar(){
+      canvas=document.getElementById('canvas');
+      imagen=document.createElement('img');
+      imagen.src="{% static 'GestorBiblioteca/js/caja.jpg' %}";
+      imagen.addEventListener('load',crearmundo);
+
+  }
+  
+  function crearmundo(){
+  
+      var ancho=canvas.width;
+      var altura=canvas.height;
+
+      renderer= new THREE.WebGLRenderer({canvas:canvas,antialias:true});
+      
+
+      renderer.setClearColor(0xFFFFFF);
+
+      escena=new THREE.Scene();
+      camara=new THREE.PerspectiveCamera(45,ancho/altura,0.1,1000);
+      camara.position.set(0,0,150);
+      
+      var geometria=new THREE.BoxGeometry(50,50,50);
+      var textura=new THREE.Texture(imagen);
+      textura.needsUpdate=true;
+      var material=new THREE.MeshPhongMaterial({map:textura});
+      
+      malla =new THREE.Mesh(geometria,material);
+      escena.add(malla);
+      
+      malla.rotation.set(10,10,0)
+      var luz=new THREE.SpotLight(0xffffff);
+      luz.position.set(0,100,250);
+      escena.add(luz);
+      renderer.render(escena,camara);
+      canvas.addEventListener("mousemove",mover);
+}
+function mover(evento){
+  malla.rotation.z=-evento.pageX*0.01;
+  malla.rotation.x=evento.pageY*0.01;
+  renderer.render(escena,camara);
+
+}  
+window.addEventListener("load",iniciar);
+
+      </script>
+
+  </head>
+
+      
+ 
+
+  <body>
+
+    <heade>
+      <section >
+        <canvas id="canvas" width="500" height="300"></canvas>
+
+    </section>
+      <h1>Biblioteca Digital</h1>
+     {% block header %}
+       
+     {% endblock header %}
+        
+      <!-----titulo o subtitulo------->
+      
+    </header>
+
+    <nav>
+      <ul class="sidebar-nav">
+
+
+        {% if user.is_authenticated %}
+        <li>User: {{ user.get_username }}</li>
+        <li><a href="{% url 'account_logout' %}?next={{request.path}}">Logout</a></li>
+        <li><a href="{% url 'book_create'  %}">nuevo libro </a></li>
+        <li><a href="{%  url 'Lista_Book'  %}">Libros</a></li>
+        <li><a href="{%  url 'author_list'  %}">Authors</a></li>
+        {% else %}
+        <li><a href="{% url 'account_login' %}?next={{request.path}}">Login</a></li>
+        {% endif %}
+      </ul>
+
+
+    </nav>
+
+
+
+    <main>
+      <div class="modal fade" id="ventana_modal" tabindex="-1"  aria-hidden="true"></div>
+
+      {% block content %}
+      {% endblock content %}
+
+      <aside>
+        cita articulo uno
+        cita artticulo dos
+      </aside>
+      <p>Has visitado esta pagina {{contador_visitas }}{% if contador_visitas == 1 %} time{% else %} times{% endif %}.
+      </p>
+
+    </main>
+
+    <footer>
+      <address>
+        colombia valle del cacuuca-Buenaventura cl9 carrera 30
+      </address>
+      <small> &copy;derechos reservados 2020 <a href="https://swapps.com/es/blog/page/12/" target="blank">tutoriales</a>
+      </small>
+    </footer>
+
+    <script>
+      
+
+      
+
+  
+      
+      function abrir_modal(url) {
+
+
+        $('#ventana_modal').load(url, function () {
+
+
+          $(this).modal({
+
+
+            backdrop: 'static',
+
+
+            keyboard: false
+
+
+          })
+
+
+          $(this).modal('show');
+
+
+        });
+
+
+        return false;
+
+
+      }
+
+
+
+
+      function cerrar_modal() {
+
+
+        $('#ventana_modal').modal('hide');
+
+
+        return false;
+
+
+      }
+      
+      //funcion para focus moda
+      //$('#ventana_modal').on('shown.bs.modal', function () {
+      //$('#id_title').trigger('focus')
+    
+
+</script>
+    {% block  scriptlocal %}
+   
+    {% endblock %}
+
+    
+  </body>
+
+</html>
